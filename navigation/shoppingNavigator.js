@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { createStackNavigator } from "react-navigation-stack";
 import ProductOverViewScreen from "../screens/shop/ProductOverViewScreen";
 import { createAppContainer } from "react-navigation";
@@ -15,7 +15,7 @@ const ShoppingNavigator = createStackNavigator(
   {
     defaultNavigationOptions: {
       headerStyle: {
-        backgroundColor: Platform.OS ==='android' ? Colors.primary : '',
+        backgroundColor: Platform.OS ==='android' ? Colors.primary : Colors.black,
       },
       headerTintColor: Platform.OS ==='android' ? "white" : Colors.primary,
     },
