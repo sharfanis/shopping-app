@@ -1,22 +1,47 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, Button } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Button,
+  TouchableNativeFeedback,
+  TouchableOpacity,
+  Platform,
+} from "react-native";
 import color from "../../constants/color";
 
 const ProductItem = (props) => {
+  let TouchableComp = TouchableOpacity;
+
+  if (Platform.OS === "android" && Platform.Version >= 21) {
+    TouchableComp = TouchableNativeFeedback;
+  }
+
   return (
-    <View style={styles.product}>
+    <TouchableComp onPress={props.onViewDetail}>
+      <View style={styles.product}>
         <View style={styles.imageContainer}>
-      <Image style={styles.image} source={{ uri: props.image }} />
+          <Image style={styles.image} source={{ uri: props.image }} />
+        </View>
+        <View style={styles.controle}>
+          <Text style={styles.title}>{props.title}</Text>
+          <Text style={styles.price}>${props.price.toFixed(2)}</Text>
+        </View>
+        <View style={styles.action}>
+          <Button
+            color={color.primary}
+            title="View Details"
+            onPress={props.onViewDetail}
+          />
+          <Button
+            color={color.primary}
+            title="To Cart"
+            onPress={props.onAddCart}
+          />
+        </View>
       </View>
-      <View style={styles.controle}>
-      <Text style={styles.title}>{props.title}</Text>
-      <Text style={styles.price}>${props.price.toFixed(2)}</Text>
-      </View>
-      <View style={styles.action}>
-        <Button color={color.primary} title="View Details" onPress={props.onViewDetail} />
-        <Button color={color.primary} title="To Cart" onPress={props.onAddCart} />
-      </View>
-    </View>
+    </TouchableComp>
   );
 };
 
@@ -36,12 +61,12 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-  imageContainer:{
+  imageContainer: {
     width: "100%",
     height: "60%",
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    overflow: 'hidden'  //will make sure any child(styles.image) inside the image container shouldn't overlap the parent (styles.imageContainer)
+    overflow: "hidden", //will make sure any child(styles.image) inside the image container shouldn't overlap the parent (styles.imageContainer)
   },
   title: {
     fontSize: 18,
@@ -55,15 +80,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    height: '25%',
-    paddingHorizontal: 20
+    height: "25%",
+    paddingHorizontal: 20,
   },
-  controle:{
-      alignItems: 'center',
-      height: '15%',
-      padding: 10
-
-  }
+  controle: {
+    alignItems: "center",
+    height: "15%",
+    padding: 10,
+  },
 });
 
 export default ProductItem;

@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, TouchableOpacity } from "react-native";
 import ProductItem from "../../components/shop/ProductItem";
 
 const ProductOverViewScreen = (props) => {
@@ -9,16 +9,29 @@ const ProductOverViewScreen = (props) => {
 
   const renderProducts = (product) => {
     return (
-      <View>
-        <ProductItem
-          image={product.item.imageUrl}
-          title={product.item.title}
-          price={product.item.price}
-          onViewDetail={()=>{}}
-          onAddCart={()=>{}}
-        />
-      </View>
+      // <TouchableOpacity onPress={() => navigateToProductDetailScreen(product)}> // this is handled inside ProductItem.
+      <ProductItem
+        image={product.item.imageUrl}
+        title={product.item.title}
+        price={product.item.price}
+        onViewDetail={() => {
+          navigateToProductDetailScreen(product);
+        }}
+        onAddCart={() => {}}
+      />
+      // </TouchableOpacity>
     );
+  };
+
+  const navigateToProductDetailScreen = (product) => {
+    // console.log(product.item.price)
+    props.navigation.navigate({
+      routeName: "ProductDetail",
+      params: {
+        id: product.item.id, // Sending the data to the next screen
+        title: product.item.title,
+      },
+    });
   };
 
   //   numColumns={2}
@@ -35,7 +48,6 @@ ProductOverViewScreen.navigationOptions = {
   headerTitle: "All Products",
 };
 
-const styles = StyleSheet.create({
-});
+const styles = StyleSheet.create({});
 
 export default ProductOverViewScreen;
