@@ -19,29 +19,33 @@ const ProductItem = (props) => {
   }
 
   return (
-    <TouchableComp onPress={props.onViewDetail}>
-      <View style={styles.product}>
-        <View style={styles.imageContainer}>
-          <Image style={styles.image} source={{ uri: props.image }} />
-        </View>
-        <View style={styles.controle}>
-          <Text style={styles.title}>{props.title}</Text>
-          <Text style={styles.price}>${props.price.toFixed(2)}</Text>
-        </View>
-        <View style={styles.action}>
-          <Button
-            color={color.primary}
-            title="View Details"
-            onPress={props.onViewDetail}
-          />
-          <Button
-            color={color.primary}
-            title="To Cart"
-            onPress={props.onAddCart}
-          />
-        </View>
+    <View style={styles.product}>
+      <View style={styles.touchable}>
+        <TouchableComp onPress={props.onViewDetail}>
+          <View>
+            <View style={styles.imageContainer}>
+              <Image style={styles.image} source={{ uri: props.image }} />
+            </View>
+            <View style={styles.controle}>
+              <Text style={styles.title}>{props.title}</Text>
+              <Text style={styles.price}>${props.price.toFixed(2)}</Text>
+            </View>
+            <View style={styles.action}>
+              <Button
+                color={color.primary}
+                title="View Details"
+                onPress={props.onViewDetail}
+              />
+              <Button
+                color={color.primary}
+                title="To Cart"
+                onPress={props.onAddCart}
+              />
+            </View>
+          </View>
+        </TouchableComp>
       </View>
-    </TouchableComp>
+    </View>
   );
 };
 
@@ -56,6 +60,10 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     height: 300,
     margin: 20,
+  },
+  touchable: {
+    overflow: "hidden",
+    borderRadius: 10,
   },
   image: {
     width: "100%",
