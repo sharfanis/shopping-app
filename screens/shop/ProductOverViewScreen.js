@@ -1,11 +1,23 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { FlatList, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useCallback } from "react";
+import { FlatList, StyleSheet, TouchableOpacity, Platform } from "react-native";
 import ProductItem from "../../components/shop/ProductItem";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "../../store/actions/cartAction";
+//HeaderButton Imports
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import CustomHeaderButton from "../../components/UI/HeaderButton";
 
 const ProductOverViewScreen = (props) => {
   // State.products.availableProdcuts here state is the state retruend and then from prodcusts we want available produicts.
   const allProducts = useSelector((state) => state.products.availableProducts);
+
+  // We'll use dispatch to dispatch an action.
+  const dispatch = useDispatch();
+  // Also we can't use useDispatch directly it has be inside a function component and then have to be used.
+  // TO prevent infinite loop we'll use useCallBack and will use dispatch and the mealid as the dependency.
+  const addToCarthandler = (prod) => {
+    dispatch(addToCart(prod));
+  };
 
   const renderProducts = (product) => {
     return (
@@ -17,7 +29,7 @@ const ProductOverViewScreen = (props) => {
         onViewDetail={() => {
           navigateToProductDetailScreen(product);
         }}
-        onAddCart={() => {}}
+        onAddCart={addToCarthandler(product.item)}
       />
       // </TouchableOpacity>
     );
@@ -46,6 +58,15 @@ const ProductOverViewScreen = (props) => {
 
 ProductOverViewScreen.navigationOptions = {
   headerTitle: "All Products",
+  headerRight: (
+    <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+      <Item
+        title="Cart"
+        iconName={Platform.OS === "android" ? "md-cart" : "ios-cart"}
+        onPress={() => {}}
+      />
+    </HeaderButtons>
+  ),
 };
 
 const styles = StyleSheet.create({});

@@ -2,17 +2,22 @@ import React, { useState } from "react";
 //Redux special Imports
 import { createStore, combineReducers } from "redux";
 import productReducer from "./store/reducers/productReducer";
+import cartReducer  from "./store/reducers/cartReducer";
 import { Provider } from "react-redux";
 import { enableScreens } from "react-native-screens";
 import { LogBox } from "react-native";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
 import ShoppingNavigator from "./navigation/shoppingNavigator";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 const rootReducer = combineReducers({
   products: productReducer,
+  cart : cartReducer
 });
 
+// Add compose with dev tools only fro DEV not for PROD !!!!! 
+// const appStore = createStore(rootReducer, composeWithDevTools());
 const appStore = createStore(rootReducer);
 // Telling react to use optmized screen component. its a good practice.
 enableScreens();
@@ -29,7 +34,7 @@ const fetchFonts = () => {
 
 export default function App() {
   // Ignoring All warnings except errors.
- LogBox.ignoreAllLogs(true);
+  LogBox.ignoreAllLogs(true);
 
   const [fontLoaded, setFontLoaded] = useState(false);
 
@@ -49,4 +54,3 @@ export default function App() {
     </Provider>
   );
 }
-
