@@ -29,7 +29,7 @@ const ProductOverViewScreen = (props) => {
         onViewDetail={() => {
           navigateToProductDetailScreen(product);
         }}
-        onAddCart={addToCarthandler(product.item)}
+        onAddCart={() => addToCarthandler(product.item)}
       />
       // </TouchableOpacity>
     );
@@ -56,17 +56,23 @@ const ProductOverViewScreen = (props) => {
   );
 };
 
-ProductOverViewScreen.navigationOptions = {
-  headerTitle: "All Products",
-  headerRight: (
-    <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-      <Item
-        title="Cart"
-        iconName={Platform.OS === "android" ? "md-cart" : "ios-cart"}
-        onPress={() => {}}
-      />
-    </HeaderButtons>
-  ),
+ProductOverViewScreen.navigationOptions = (navigationData) => {
+  return {
+    headerTitle: "All Products",
+    headerRight: (
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item
+          title="Cart"
+          iconName={Platform.OS === "android" ? "md-cart" : "ios-cart"}
+          onPress={() => {
+            navigationData.navigation.navigate({
+              routeName: "Cart",
+            });
+          }}
+        />
+      </HeaderButtons>
+    ),
+  };
 };
 
 const styles = StyleSheet.create({});

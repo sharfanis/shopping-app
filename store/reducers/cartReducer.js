@@ -2,7 +2,7 @@ import { ADD_TO_CART } from "../actions/cartAction";
 import CartItem from "../../models/cart-item";
 
 const initialState = {
-  items: [],
+  items: {},
   totalAmount: 0,
 };
 
@@ -13,30 +13,26 @@ const cartReducer = (state = initialState, action) => {
       const prodPrice = addedProduct.price;
       const prodTitle = addedProduct.title;
 
-      let newItemOrUpdatedItem;
-      // first we check if the item exists in items cart .
+      let updatedOrNewCartItem;
+
       if (state.items[addedProduct.id]) {
-        newItemOrUpdatedItem = new CartItem(
-          state.item[addedProduct.id].quantity + 1,
+        // already have the item in the cart
+        updatedOrNewCartItem = new CartItem(
+          state.items[addedProduct.id].quantity + 1,
           prodPrice,
           prodTitle,
-          state.item[addedProduct.id].sum + prodPrice
+          state.items[addedProduct.id].sum + prodPrice
         );
       } else {
-        // First time adding the value.
-        newItemOrUpdatedItem = new CartItem(1, prodPrice, prodTitle, prodPrice);
+        updatedOrNewCartItem = new CartItem(1, prodPrice, prodTitle, prodPrice);
       }
-      // this will add the item to the list of items.
       return {
         ...state,
-        items: { ...state.items, [addedProduct.id]: newItemOrUpdatedItem },
-        totalAmount: state.totalAmount + prodPrice,
+        items: { ...state.items, [addedProduct.id]: updatedOrNewCartItem },
+        totalAmount: state.totalAmount + prodPrice
       };
-
-    default:
-      return state;
   }
-
+  return state;
 };
 
 export default cartReducer;
