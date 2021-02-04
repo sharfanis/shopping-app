@@ -1,4 +1,5 @@
 import { ADD_TO_CART } from "../actions/cartAction";
+import { DELETE_FROM_CART } from "../actions/cartAction";
 import CartItem from "../../models/cart-item";
 
 const initialState = {
@@ -8,6 +9,7 @@ const initialState = {
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
+    // Start of case 1
     case ADD_TO_CART:
       const addedProduct = action.product;
       const prodPrice = addedProduct.price;
@@ -29,9 +31,40 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         items: { ...state.items, [addedProduct.id]: updatedOrNewCartItem },
-        totalAmount: state.totalAmount + prodPrice
+        totalAmount: state.totalAmount + prodPrice,
       };
+
+      // End of case 1
+
+      // Start of case 2
+
+    case DELETE_FROM_CART:
+      const selectedCartItem = state.items[action.pid];
+      let updatedCartItems;
+      if (selectedCartItem.quantity === 1) {
+        updatedCartItems = { ...state.items };
+        delete updatedCartItems[action.pid];
+      } else {
+        // need to reduce the quantity and not erase it.
+        const updatedCartItem = new CartItem(
+          selectedCartItem.quantity - 1,
+          selectedCartItem.productPrice,
+          selectedCartItem.productTitle,
+          selectedCartItem.sum - selectedCartItem.productPrice
+        );
+
+        updatedCartItems = { ...state.items, [action.pid]: updatedCartItem };
+      }
+
+      return {
+        ...state,
+        items: updatedCartItems,
+        totalAmount: state.totalAmount - selectedCartItem.productPrice,
+      };
+
+      // End of case 2
   }
+
   return state;
 };
 

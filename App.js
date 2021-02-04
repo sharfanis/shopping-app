@@ -24,11 +24,11 @@ enableScreens();
 
 const fetchFonts = () => {
   Font.loadAsync({
-    // "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
-    // "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
-    // "imbue": require("./assets/fonts/Imbue.ttf"),
-    // "imbue-bold": require("./assets/fonts/Imbue-Bold.ttf"),
-    // "bangers": require("./assets/fonts/Bangers-Regular.ttf"),
+    "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
+    "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
+    "imbue": require("./assets/fonts/Imbue.ttf"),
+    "imbue-bold": require("./assets/fonts/Imbue-Bold.ttf"),
+    "bangers": require("./assets/fonts/Bangers-Regular.ttf"),
   });
 };
 

@@ -27,11 +27,11 @@ const ShoppingNavigator = createStackNavigator(
           Platform.OS === "android" ? Colors.primary : Colors.black,
       },
       headerTitleStyle:{
-        // fontFamily: 'open-sans-bold',
+        fontFamily: 'open-sans-bold',
         fontSize: 20
       },
       headerBackTitleStyle: {
-        // fontFamily: 'open-sans-bold',
+        fontFamily: 'open-sans-bold',
         fontSize: 16
       },
       headerTintColor: Platform.OS === "android" ? "white" : Colors.primary,
