@@ -36,7 +36,6 @@ const ProductOverViewScreen = (props) => {
   };
 
   const navigateToProductDetailScreen = (product) => {
-    // console.log(product.item.price)
     props.navigation.navigate({
       routeName: "ProductDetail",
       params: {
@@ -59,6 +58,17 @@ const ProductOverViewScreen = (props) => {
 ProductOverViewScreen.navigationOptions = (navigationData) => {
   return {
     headerTitle: "All Products",
+    headerLeft: (
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item
+          title="Menu"
+          iconName={Platform.OS === "android" ? "md-menu" : "ios-menu"}
+          onPress={() => {
+            navigationData.navigation.toggleDrawer();
+          }}
+        />
+      </HeaderButtons>
+    ),
     headerRight: (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item

@@ -5,6 +5,7 @@ import ProductItem from "../../components/shop/ProductItem";
 import CartItem from "../../components/shop/CartItem";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteFromCart } from "../../store/actions/cartAction";
+import * as orderActions from "../../store/actions/orderAction";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const CartScreen = (props) => {
@@ -44,25 +45,26 @@ const CartScreen = (props) => {
     dispatch(deleteFromCart(pid));
   };
 
+  const orderNowHandler = (cartItems, totalAmount) => {
+    dispatch(orderActions.addOrder(cartItems, totalAmount));
+  };
+
   return (
     <View style={styles.screen}>
       <View style={styles.summary}>
         <Text style={styles.summaryText}>
           Total :
           <Text style={styles.amount}>
-            {" "}
             ${cartTotalAmount.toFixed(2).replace("-0", "0")}
           </Text>
         </Text>
-        {/* <Button 
-          color={color.accent}
-          title="Order Now"
+        <TouchableOpacity
           disabled={cartItems.length === 0}
-        /> */}
-        <TouchableOpacity disabled={cartItems.length === 0}>
+          onPress={() => orderNowHandler(cartItems, cartTotalAmount.toFixed(2))}
+        >
           <Text
             style={{
-              color: cartItems.length === 0 ? 'grey' : color.black,
+              color: cartItems.length === 0 ? "grey" : color.accent,
               fontSize: 19,
               fontFamily: "open-sans-bold",
             }}
@@ -81,6 +83,10 @@ const CartScreen = (props) => {
       </View>
     </View>
   );
+};
+
+CartScreen.navigationOptions = {
+  headerTitle: "Your Shopping Cart",
 };
 
 const styles = StyleSheet.create({
