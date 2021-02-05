@@ -1,6 +1,7 @@
 import { ADD_TO_CART } from "../actions/cartAction";
 import { DELETE_FROM_CART } from "../actions/cartAction";
 import CartItem from "../../models/cart-item";
+import { ADD_ORDER } from "../actions/orderAction";
 
 const initialState = {
   items: {},
@@ -33,11 +34,9 @@ const cartReducer = (state = initialState, action) => {
         items: { ...state.items, [addedProduct.id]: updatedOrNewCartItem },
         totalAmount: state.totalAmount + prodPrice,
       };
+    // End of case 1
 
-      // End of case 1
-
-      // Start of case 2
-
+    // Start of case 2
     case DELETE_FROM_CART:
       const selectedCartItem = state.items[action.pid];
       let updatedCartItems;
@@ -61,8 +60,12 @@ const cartReducer = (state = initialState, action) => {
         items: updatedCartItems,
         totalAmount: state.totalAmount - selectedCartItem.productPrice,
       };
+    // End of case 2
 
-      // End of case 2
+    // Start of Case 3
+    case ADD_ORDER:
+      return initialState;
+    // End of case 3
   }
 
   return state;
