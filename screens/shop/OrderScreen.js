@@ -1,18 +1,17 @@
 import React from "react";
-import { Text, View, FlatList, StyleSheet , Platform} from "react-native";
+import { Text, View, FlatList, StyleSheet, Platform } from "react-native";
 import { useSelector } from "react-redux";
 //HeaderButton Imports
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "../../components/UI/HeaderButton";
+import OrderItem from "../../components/shop/OrderItem";
 
 const OrderScreen = (props) => {
   const orders = useSelector((state) => state.orders.orders);
 
   const displayItems = (itemData) => {
     return (
-      <View>
-        <Text>Total:{itemData.item.totalAmount}</Text>
-      </View>
+      <OrderItem amount={itemData.item.totalAmount} date={itemData.item.redeableDate} />
     );
   };
   return (

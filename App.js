@@ -19,8 +19,8 @@ const rootReducer = combineReducers({
 });
 
 // Add compose with dev tools only fro DEV not for PROD !!!!!
-const appStore = createStore(rootReducer, composeWithDevTools());
-//const appStore = createStore(rootReducer);
+//const appStore = createStore(rootReducer, composeWithDevTools());
+const appStore = createStore(rootReducer);
 // Telling react to use optmized screen component. its a good practice.
 enableScreens();
 
