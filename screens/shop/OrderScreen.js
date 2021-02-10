@@ -11,7 +11,7 @@ const OrderScreen = (props) => {
 
   const displayItems = (itemData) => {
     return (
-      <OrderItem amount={itemData.item.totalAmount} date={itemData.item.redeableDate} />
+      <OrderItem amount={itemData.item.totalAmount} date={itemData.item.readableDate} />
     );
   };
   return (
