@@ -6,7 +6,7 @@ class Order {
     this.date = date;
   }
 
-  get redeableDate() {
+  get readableDate() {
     return this.date.toLocaleDateString("en-EN", {
       year: "numeric",
       month: "long",
