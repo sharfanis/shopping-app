@@ -8,15 +8,24 @@ import {
   ScrollView,
   ColorPropType,
 } from "react-native";
-import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import color from "../../constants/color";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "../../store/actions/cartAction";
 
 const ProductDetailScreen = (props) => {
   const prodId = props.navigation.getParam("id");
   //const prodTitle = props.navigation.getParam("title");
   const allProducts = useSelector((state) => state.products.availableProducts);
   const myProduct = allProducts.find((prod) => prod.id === prodId);
+
+    // We'll use dispatch to dispatch an action.
+    const dispatch = useDispatch();
+    // Also we can't use useDispatch directly it has be inside a function component and then have to be used.
+    // TO prevent infinite loop we'll use useCallBack and will use dispatch and the mealid as the dependency.
+    const addToCarthandler = (prod) => {
+      dispatch(addToCart(prod));
+    };
 
   // We can use this logic but there is slight delay due to calculation why not just pass the value of title in a param .
   // useEffect(() => {
@@ -33,7 +42,7 @@ const ProductDetailScreen = (props) => {
             style={styles.buttonStyle}
             color={color.primary}
             title="Add to Cart"
-            onPress={() => {}}
+            onPress= {() => addToCarthandler(myProduct)}
           />
         </View>
         <Text style={styles.price}>${myProduct.price.toFixed(2)}</Text>
