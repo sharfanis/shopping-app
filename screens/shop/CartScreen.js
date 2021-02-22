@@ -32,6 +32,7 @@ const CartScreen = (props) => {
         title={product.item.productTitle}
         quantity={product.item.quantity}
         amount={product.item.sum}
+        deletable
         onRemove={() => removeItemFromCartHandler(product.item.productId)}
       />
     );
