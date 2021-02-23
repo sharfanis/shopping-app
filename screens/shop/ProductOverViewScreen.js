@@ -1,11 +1,12 @@
 import React, { useCallback } from "react";
-import { FlatList, StyleSheet, TouchableOpacity, Platform } from "react-native";
+import { FlatList, StyleSheet, Platform, Button } from "react-native";
 import ProductItem from "../../components/shop/ProductItem";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../../store/actions/cartAction";
 //HeaderButton Imports
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "../../components/UI/HeaderButton";
+import color from '../../constants/color';
 
 const ProductOverViewScreen = (props) => {
   // State.products.availableProdcuts here state is the state retruend and then from prodcusts we want available produicts.
@@ -29,8 +30,20 @@ const ProductOverViewScreen = (props) => {
         onViewDetail={() => {
           navigateToProductDetailScreen(product);
         }}
-        onAddCart={() => addToCarthandler(product.item)}
-      />
+      >
+        <Button
+          color={color.primary}
+          title="View Details"
+          onPress={() => {
+            navigateToProductDetailScreen(product);
+          }}
+        />
+        <Button
+          color={color.primary}
+          title="To Cart"
+          onPress={() => addToCarthandler(product.item)}
+        />
+      </ProductItem>
       // </TouchableOpacity>
     );
   };
