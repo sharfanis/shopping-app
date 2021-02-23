@@ -11,6 +11,7 @@ import OrderScreen from "../screens/shop/OrderScreen";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import { Ionicons } from "@expo/vector-icons";
 import color from "../constants/color";
+import UserProductScreen from "../screens/user/UserproductsScreen";
 
 const defaultNavOptions = {
   headerStyle: {
@@ -75,10 +76,34 @@ const OrdersNavigator = createStackNavigator(
   }
 );
 
+const loggedInUserProductsNavigator = createStackNavigator(
+  {
+    UserProducts: { screen: UserProductScreen },
+  },
+  {
+    // This option only works when your navigator is used or is a part of another navigaotr.
+    // like this one is part of Shop Navigator.
+    navigationOptions: {
+      drawerIcon: (drawerConfig) => (
+        <Ionicons
+          name={Platform.OS === "android" ? "md-create" : "ios-create"}
+          size={23}
+          color={drawerConfig.tintColor}
+        />
+      ),
+    },
+    defaultNavigationOptions: defaultNavOptions,
+  }
+);
+
+
+
 const ShopNavigator = createDrawerNavigator(
   {
     Products: ProductsNavigator,
     Orders: OrdersNavigator,
+    Admin: loggedInUserProductsNavigator
+
   },
   {
     contentOptions: {
