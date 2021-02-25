@@ -68,13 +68,13 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    marginVertical: 4,
-    fontFamily: 'bangers',
+    marginVertical: 2,
+    //fontFamily: 'bangers',
   },
   price: {
     fontSize: 14,
     color: "#888",
-    fontFamily: 'bangers',
+    //fontFamily: 'bangers',
   },
   action: {
     flexDirection: "row",

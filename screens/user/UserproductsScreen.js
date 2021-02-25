@@ -29,7 +29,11 @@ const UserProductScreen = (props) => {
           navigateToProductDetailScreen(product);
         }}
       >
-        <Button color={color.primary} title="Edit Details" onPress={() => {}} />
+        <Button
+          color={color.primary}
+          title="Edit Details"
+          onPress={() => navigateToEditProductScreen(product)}
+        />
         <Button
           color={color.primary}
           title="Delete"
@@ -51,6 +55,16 @@ const UserProductScreen = (props) => {
       },
     });
   };
+
+  const navigateToEditProductScreen = (product) => {
+    props.navigation.navigate({
+      routeName: "EditProduct",
+      params: {
+        id: product.item.id, // Sending the data to the next screen
+      },
+    });
+  };
+
   return (
     <FlatList
       data={userProducts}
@@ -77,11 +91,11 @@ UserProductScreen.navigationOptions = (navigationData) => {
     headerRight: (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
-          title="Cart"
-          iconName={Platform.OS === "android" ? "md-cart" : "ios-cart"}
+          title="Add"
+          iconName={Platform.OS === "android" ? "md-create" : "ios-create"}
           onPress={() => {
             navigationData.navigation.navigate({
-              routeName: "Cart",
+              routeName: "EditProduct",
             });
           }}
         />

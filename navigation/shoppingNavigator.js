@@ -12,17 +12,18 @@ import { createDrawerNavigator } from "react-navigation-drawer";
 import { Ionicons } from "@expo/vector-icons";
 import color from "../constants/color";
 import UserProductScreen from "../screens/user/UserproductsScreen";
+import EditProductScreen from "../screens/user/EditProductScreen";
 
 const defaultNavOptions = {
   headerStyle: {
     backgroundColor: Platform.OS === "android" ? Colors.primary : Colors.black,
   },
   headerTitleStyle: {
-    fontFamily: "open-sans-bold",
+    //fontFamily: "open-sans-bold",
     fontSize: 20,
   },
   headerBackTitleStyle: {
-    fontFamily: "open-sans-bold",
+    // fontFamily: "open-sans-bold",
     fontSize: 16,
   },
   headerTintColor: Platform.OS === "android" ? "white" : Colors.primary,
@@ -79,7 +80,9 @@ const OrdersNavigator = createStackNavigator(
 const loggedInUserProductsNavigator = createStackNavigator(
   {
     UserProducts: { screen: UserProductScreen },
+    EditProduct: { screen: EditProductScreen },
   },
+
   {
     // This option only works when your navigator is used or is a part of another navigaotr.
     // like this one is part of Shop Navigator.
@@ -96,14 +99,11 @@ const loggedInUserProductsNavigator = createStackNavigator(
   }
 );
 
-
-
 const ShopNavigator = createDrawerNavigator(
   {
     Products: ProductsNavigator,
     Orders: OrdersNavigator,
-    Admin: loggedInUserProductsNavigator
-
+    Admin: loggedInUserProductsNavigator,
   },
   {
     contentOptions: {

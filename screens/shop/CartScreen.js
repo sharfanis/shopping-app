@@ -67,7 +67,7 @@ const CartScreen = (props) => {
             style={{
               color: cartItems.length === 0 ? "grey" : color.accent,
               fontSize: 19,
-              fontFamily: "open-sans-bold",
+              // fontFamily: "open-sans-bold",
             }}
           >
             ORDER NOW
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   orderStyle: {
-    fontFamily: "bangers",
+    // fontFamily: "bangers",
   },
   cartList: {
     shadowColor: color.black,
