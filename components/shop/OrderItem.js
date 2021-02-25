@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   totalAmount: {
-    fontFamily: "open-sans-bold",
+    //fontFamily: "open-sans-bold",
     fontSize: 16,
   },
   date: {

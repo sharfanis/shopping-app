@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     color: "#888",
     fontSize: 16,
     margin: 7,
-    fontFamily: 'open-sans-bold'
+    //fontFamily: 'open-sans-bold'
   },
   title: { fontSize: 16 ,  fontFamily: 'bangers' },
   amount: { fontSize: 16 ,  margin: 9 ,  fontFamily: 'open-sans-bold'},

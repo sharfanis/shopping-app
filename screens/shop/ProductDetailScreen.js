@@ -71,13 +71,13 @@ const styles = StyleSheet.create({
   },
   price: {
     fontSize: 20,
-    fontFamily: 'bangers',
+    // fontFamily: 'bangers',
     color: "#888",
     textAlign: "center",
     marginVertical: 20,
   },
   desc: {
-    fontFamily: 'open-sans',
+    // fontFamily: 'open-sans',
     fontSize: 20,
     textAlign: "center",
     marginHorizontal: 20
